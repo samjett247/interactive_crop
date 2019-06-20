@@ -88,19 +88,21 @@ class Ellipse(Shape):
         # Parses the slider inputs
         x0= x_size[0]
         x1= x_size[1]
-        y0 = im.size[1]-y_size[1]
-        y1 = im.size[1]-y_size[0]
-        # Assigns the shape params to the class property
+        y0 = self.image.size[1]-y_size[1]
+        y1 = self.image.size[1]-y_size[0]
+        # Assigns the size params to the class property
         self.size = (x0,y0,x1,y1)
+        self.adjustment_count +=1
     
-    def draw(self, img):
+    def draw(self):
         """
         Draws a rectangle on the provided PIL Image (img), based on self.size
         """
-        draw = ImageDraw.draw(img)
-        line_width = int(np.min(self.image.size)/150)
-        x0,y0,x1,y1 = self.size
-        draw.ellipse((x0,y0,x1,y1), width=line_width)
+        if self.adjustment_count>3:
+            draw = ImageDraw.Draw(self.image)
+            line_width = int(np.min(self.image.size)/150)
+            x0,y0,x1,y1 = self.size
+            draw.ellipse((x0,y0,x1,y1), width=line_width, outline='white')
     
 
             
