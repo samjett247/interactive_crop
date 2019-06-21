@@ -1,16 +1,19 @@
 import ipywidgets as widgets
-from IPython.display import display, HTML, clear_output
+from IPython.display import display, HTML, clear_output, Markdown
 import time
 from PIL import Image, ImageDraw
 from sys import exit as sysexit
-from shapes import Rectangle, Ellipse
+from shapes import Rectangle, Ellipse, Triangle
 import numpy as np
 import widgets_helper
 import pprint
-from ipyexit import exit
 
-def main(image_list, image_names_list = [], crop_shape = 'Rectangle', continuous_update=True, optimize = True,
-    callback = lambda x,y: print('{}: {}'.format(x,y)); time.sleep(5)):
+def default_callback(im_name, im_obj):
+    print('{}: {}'.format(im_name,im_obj.get_size()))
+    time.sleep(4)
+    
+def main(image_list, image_name_list = [], crop_shape = 'Rectangle', continuous_update=True, optimize = True,
+    callback = default_callback):
     """
     This function takes a list of images and allows the user interactively crop these images through a vertical range slider and a horizontal range slider. Once the crop size is accepted, the callback kwarg will be called and provided the name of the cropped image (from image_list) and the shape of the cropped_image.
 
@@ -38,19 +41,18 @@ def main(image_list, image_names_list = [], crop_shape = 'Rectangle', continuous
     
     def show_image(image_name):
         """
-        Shows the image at the desired size
+        Shows the image at the desired size.
+        image_name: name of the image
         """
         # Clear output from prior image
         clear_output()
-        # Read image from file
-        im = Image.open(image_name)
-        if optimize:
-            im = im.convert('L')
-            im = Image.fromarray(np.array(im).astype(np.uint8))
+        
+        # Get the image
+        im = image_LUT[image_name]
             
         # Create copy of image to draw on
-        display(HTML('<h3 style="margin:5px;text-align:center">'+image_name+'</h3>'))
-        
+        display(HTML('<h3 style="margin:5px;text-align:left">'+image_name+'</h3>'))
+
         # Instantiate shape object
         shape = SHAPE_DICT[crop_shape](x_mod.value, y_mod.value, im.copy())
         
@@ -64,7 +66,7 @@ def main(image_list, image_names_list = [], crop_shape = 'Rectangle', continuous
         
         def add_crop_patch(x_size, y_size):
             """
-            Adds the crop pa
+            Adds the crop patch to the image.
             """
             # Ensure shape is up to date on slider changes
             shape.convert_sliders_to_shape_params(x_size, y_size)
@@ -73,8 +75,8 @@ def main(image_list, image_names_list = [], crop_shape = 'Rectangle', continuous
             # Plot the shape on im_draw
             shape.display(optimize)
             shape.erase_drawing_on_image(im)
+            
         widgets.interact(add_crop_patch, x_size=x_mod, y_size = y_mod)
-        
         # Click button to save params
         save_crop_sizes=widgets.interact.options(manual=True, manual_name="Save Crop Sizes")
         @save_crop_sizes
@@ -82,23 +84,24 @@ def main(image_list, image_names_list = [], crop_shape = 'Rectangle', continuous
             """
             This will handle the onbutton click event of the cropper.
             """
-            # Get the shape of the accepted crop size
-            crop_size = shape.get_size()
             # Call the callback function, providing the image_name and the crop size
-            callback(image_name, crop_size)
-            coord_dict[image_name] = crop_size
+            callback(image_name, shape)
+            coord_dict[image_name] = shape.get_size()
             # Move to the next image_name or close
             im_ind = image_list.index(image_name)
             if im_ind != len(image_list)-1:
                 image_selector.value = image_list[im_ind+1]
             else:
-                print('\n Made it through all the tests. \nPrinting cropped results below.\n')
+                print('\n Made it through all the tests.\nPrinting cropped results below.\n')
                 print('\n\n')
                 pprint.pprint(coord_dict)
                 print('\n\n')
-            time.sleep(2) # Change this to change how long you have to look at the cropped results
             return
         return
+    # Create image LUT based on image_name arguments
+    image_list, image_LUT = widgets_helper.create_image_name_LUT(image_list, image_name_list, optimize)
+    
+    # Build the image list based on the type of image_list
     image_selector, x_size_selector, y_size_selector = widgets_helper.get_main_widgets(image_list, continuous_update)
     im_mod, x_mod, y_mod = widgets_helper.get_hidden_widgets(image_list,continuous_update)
     
@@ -111,8 +114,9 @@ def main(image_list, image_names_list = [], crop_shape = 'Rectangle', continuous
     main_widget = widgets.GridBox(children=[image_selector,x_size_selector,y_size_selector, cropper ],
         layout=widgets.Layout(
             width='90%',
+            height='100%',
             grid_template_rows='10% 90%',
-            grid_template_columns='30% 70%',
+            grid_template_columns='35% 65%',
             grid_template_areas='''
             "im_selector width"
             "height main "
