@@ -9,26 +9,32 @@ import widgets_helper
 import pprint
 from ipyexit import exit
 
-def main(image_list, crop_shape = 'Rectangle', continuous_update=True, optimize = True,
-    callback = lambda x,y: print('{}: {}'.format(x,y))):
+def main(image_list, image_names_list = [], crop_shape = 'Rectangle', continuous_update=True, optimize = True,
+    callback = lambda x,y: print('{}: {}'.format(x,y)); time.sleep(5)):
     """
     This function takes a list of images and allows the user interactively crop these images through a vertical range slider and a horizontal range slider. Once the crop size is accepted, the callback kwarg will be called and provided the name of the cropped image (from image_list) and the shape of the cropped_image.
 
-    Arguments: 
-    image_list - A list of image names
-    
-    shape - The desired type of crop shape
+    Required Arguments: 
+    image_list(list of str or nd.array objects) - A list of image filenames or a list of images as np.ndarray objects. 
+
+    Optional Arguments:
     continuous_update (default: True) - Bool to indicate whether the plot should dynamically re-render as the user drags the slider, or should wait til slider release to rerender
-    optimize (default: True)- Bool to indicate whether the program can optimize for faster rendering of crop boxes, including displaying grayscale images
-    outline_color (default: red) - 
-    callback - The function to call after the crop size is accepted (via button click)
+
+    image_names_list(list, default: []) - The names of the images, to use when displaying the images and to pass to callback function. Must have same length as image_list. Recommended when providing nd.array objects in the image_list.
+
+    shape (str, default: Rectangle) - The desired type of crop shape; Current options - Rectangle, Ellipse, Triangle
+
+    optimize (bool, default: True) - Indicates whether the program can optimize for faster updating of crop boxes, including displaying grayscale images and reducing pixel quality of display
+
+    callback(function, default: prints the image name and crop size) - The function to call after the crop size is accepted via button click. The function receives the name of the image (or image index if image_list is np.ndarray objects) and the image object, defined in shapes.py. Crop size is available as a prop of the image object as img_obj.size. Similarly, modified PIL image is a prop at img_obj.image
 
     Returns: 
-    coord_dict - A dict mapping image names to cropped coordinates
+    cropping widget
+
     """
     # Need these to retain the global scope
     coord_dict = {}
-    SHAPE_DICT = {'Rectangle':Rectangle,'Ellipse':Ellipse} # shape arg mapping
+    SHAPE_DICT = {'Rectangle':Rectangle,'Ellipse':Ellipse, 'Triangle':Triangle} # shape arg mapping
     
     def show_image(image_name):
         """

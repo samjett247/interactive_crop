@@ -96,14 +96,41 @@ class Ellipse(Shape):
     
     def draw(self):
         """
-        Draws a rectangle on the provided PIL Image (img), based on self.size
+        Draws a rectangle on the self.image based on self.size, only if the adjustment_count is sufficiently high, because the initialization involves some adjustments
         """
         if self.adjustment_count>3:
             draw = ImageDraw.Draw(self.image)
             line_width = int(np.min(self.image.size)/150)
             x0,y0,x1,y1 = self.size
             draw.ellipse((x0,y0,x1,y1), width=line_width, outline='white')
-    
+
+class Triangle(Shape):
+    """
+    Defines the Triangle class. Each triangle is isosceles and described by self.size, a 4-element tuple - (x0, y0, x1, y1), where x0 describes the left-most point of the triangle,y0 describes the highest point of the triangle, and (x1,y1) are the coords of bottom right point of triangle. Origin of the rectangle is the same as the image origin, typically the top left point with x axis increasing from left to right and y axis increasing from top to bottom (reverse). If the origin of the cropped image is different, shape will follow axis of the cropped image.
+    """
+    def convert_sliders_to_shape_params(self, x_size, y_size):
+        """
+        Parses slider inputs into the relevant parameters to describe the triangle. See class description for point description.
+        """
+        # Parses the slider inputs
+        x0= x_size[0]
+        x1= x_size[1]
+        y0 = self.image.size[1]-y_size[1]
+        y1 = self.image.size[1]-y_size[0]
+        # Assigns the size params to the class property
+        self.size = (x0,y0,x1,y1)
+        self.adjustment_count +=1
+        self.crop_shape = 'Triangle'
+
+    def draw(self):
+        """
+        Draws a triangle on the self.image based on self.size, only if the adjustment_count is sufficiently high, because the initialization involves some adjustments
+        """
+        if self.adjustment_count>3:
+            draw = ImageDraw.Draw(self.image)
+            line_width = int(np.min(self.image.size)/150)
+            x0,y0,x1,y1 = self.size
+            draw.ellipse((x0,y0,x1,y1), width=line_width, outline='white')
 
             
         
