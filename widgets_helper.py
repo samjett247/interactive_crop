@@ -70,7 +70,7 @@ def get_main_widgets(image_list, continuous_update):
         description='Height:',
         continuous_update=continuous_update,
         orientation='vertical',
-        layout=widgets.Layout(width='auto',height = 'auto', grid_area='height')
+        layout=widgets.Layout(height='100%',width = 'auto', grid_area='height')
     )
     return image_selector, x_size_selector, y_size_selector
     
@@ -79,12 +79,12 @@ def get_hidden_widgets(image_list, continuous_update):
     # Define mod sliders for cropping function; We'll define value and max, min 
     # once we know image size
     x_mod = widgets.IntRangeSlider(
-        layout=widgets.Layout(width='0%',height='0%', visibility='hidden')
+        layout=widgets.Layout(display='none')
     )
     y_mod = widgets.IntRangeSlider(
         continuous_update=continuous_update,
         step=1,
-        layout=widgets.Layout(width='0%',height='0%', visibility='hidden')
+        layout=widgets.Layout(display='none')
     )
     im_mod = widgets.Select(
         options=image_list,

@@ -38,7 +38,6 @@ def main(image_list, image_name_list = [], crop_shape = 'Rectangle', continuous_
     # Need these to retain the global scope
     coord_dict = {}
     SHAPE_DICT = {'Rectangle':Rectangle,'Ellipse':Ellipse, 'Triangle':Triangle} # shape arg mapping
-    
     def show_image(image_name):
         """
         Shows the image at the desired size.
@@ -116,11 +115,12 @@ def main(image_list, image_name_list = [], crop_shape = 'Rectangle', continuous_
             width='90%',
             height='100%',
             grid_template_rows='10% 90%',
-            grid_template_columns='35% 65%',
+            grid_template_columns='25% 75%',
             grid_template_areas='''
             "im_selector width"
             "height main "
             '''))
+
     return main_widget
 
 if __name__ == '__main__':
