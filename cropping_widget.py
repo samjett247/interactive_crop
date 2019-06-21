@@ -53,7 +53,7 @@ def main(image_list, image_name_list = [], crop_shape = 'Rectangle', continuous_
         display(HTML('<h3 style="margin:5px;text-align:left">'+image_name+'</h3>'))
 
         # Instantiate shape object
-        shape = SHAPE_DICT[crop_shape](x_mod.value, y_mod.value, im.copy())
+        shape = SHAPE_DICT[crop_shape](x_mod.value, y_mod.value, im.copy(), crop_shape)
         
         # Adjust the slider limits based on the pixel size of the image
         x_size_selector.min, x_size_selector.max = 0, im.size[0]

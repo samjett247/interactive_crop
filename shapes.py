@@ -10,7 +10,7 @@ class Shape:
     """
     Defines methods and properties for the basic Shape class. Specific shapes extend this class
     """
-    def __init__(self, x_size, y_size, image):
+    def __init__(self, x_size, y_size, image, crop_shape):
         """
         Parses slider inputs into the relevant parameters to describe the rectangle. For rectangle, these are 
         colstart, rowstart, width, height
@@ -21,9 +21,12 @@ class Shape:
         # Assigns the im to self.image
         self.image = image
         self.convert_sliders_to_shape_params(x_size, y_size)
+        self.shape =crop_shape
         
     def get_size(self):
         return self.size
+    def get_crop_shape(self):
+        return self.shape
 
     def display(self, optimize):
         """
@@ -120,7 +123,6 @@ class Triangle(Shape):
         # Assigns the size params to the class property
         self.size = (x0,y0,x1,y1)
         self.adjustment_count +=1
-        self.crop_shape = 'Triangle'
 
     def draw(self):
         """
@@ -130,8 +132,8 @@ class Triangle(Shape):
             draw = ImageDraw.Draw(self.image)
             line_width = int(np.min(self.image.size)/150)
             x0,y0,x1,y1 = self.size
-            draw.ellipse((x0,y0,x1,y1), width=line_width, outline='white')
-
-            
-        
-        
+            # Convert point 0,1 to point A,B,C of isosceles triangle
+            xa, ya = x0,y1
+            xb, yb = x1,y1
+            xc, yc = ((x0+x1)/2),y0 
+            draw.line([(xa,ya), (xb,yb), (xc,yc), (xa,ya)], width=line_width, fill='white')
