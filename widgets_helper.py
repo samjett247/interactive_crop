@@ -70,7 +70,7 @@ def get_main_widgets(image_list, continuous_update):
         description='Height:',
         continuous_update=continuous_update,
         orientation='vertical',
-        layout=widgets.Layout(height='100%',width = 'auto', grid_area='height')
+        layout=widgets.Layout(height='90%',width = 'auto', grid_area='height')
     )
     return image_selector, x_size_selector, y_size_selector
     

@@ -10,7 +10,7 @@ import pprint
 
 def default_callback(im_name, im_obj):
     print('{}: {}'.format(im_name,im_obj.get_size()))
-    time.sleep(4)
+    time.sleep(1.5)
     
 def main(image_list, image_name_list = [], crop_shape = 'Rectangle', continuous_update=True, optimize = True,
     callback = default_callback):
