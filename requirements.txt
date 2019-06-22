@@ -1,5 +1,9 @@
 pandas
+pprint
+time
+sys
 numpy
 pillow
 ipywidgets
+ipython
 
