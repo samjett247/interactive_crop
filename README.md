@@ -1,7 +1,7 @@
 # jupyter-interactive-cropping-widget
 An interactive widget to rapidly crop images in Jupyter notebooks.
 
-![gif cropper](example_cropper.gif)
+![gif cropper](examples/example_cropper.gif)
 
 This widget can be found on the PyPI repository [here]('').
 
@@ -26,4 +26,6 @@ import os
 image_list = ['image_samples/'+i for i in os.listdir('image_samples')]
 crop(image_list)
 ```
-For further examples of cropper use, see the `Examples.ipynb`.
+For further examples of cropper use, see the `Examples.ipynb`. Make sure to run the `jupyter lab` startup command from the root directory when running `Examples.ipynb`.
+
+![interface](examples/interface.png)
