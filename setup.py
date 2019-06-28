@@ -7,7 +7,7 @@ setuptools.setup(
      version='0.0.1',
      author="Sam Jett",
      author_email="samjett247@gmail.com",
-     description="An interactive image cropping tool for Jupyter Notebooks",
+     description="An interactive image cropping tool for Jupyter Notebooks in Python",
      long_description=long_description,
    long_description_content_type="text/markdown",
      url="https://github.com/samjett247/crop-interactive",
