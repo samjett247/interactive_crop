@@ -1,4 +1,4 @@
-# jupyter-interactive-cropping-widget
+# Jupyter Interactive Cropping Widget
 An interactive widget to rapidly crop images in Jupyter notebooks.
 
 ![gif cropper](static/example_cropper.gif)
