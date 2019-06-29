@@ -1,3 +1,4 @@
+import os
 import numpy as np
 
 import ipywidgets as widgets
@@ -26,11 +27,12 @@ def create_image_name_LUT(image_list, image_name_list, optimize):
                 return image_name_list, {image_name_list[i]:Image.fromarray(np.array(Image.open(image_list[i])).astype(np.uint8)).convert('L') for i in range(len(image_list))}
             else:
                 return image_name_list, {image_name_list[i]:Image.open(image_list[i]) for i in range(len(image_list))}
-        else: 
+        else:
+            new_name_list = [os.path.basename(i) for i in image_list]
             if optimize:
-                 return image_list, {image_list[i]:Image.fromarray(np.array(Image.open(image_list[i])).astype(np.uint8)).convert('L') for i in range(len(image_list))}
+                 return new_name_list, {new_name_list[i]:Image.fromarray(np.array(Image.open(image_list[i])).astype(np.uint8)).convert('L') for i in range(len(image_list))}
             else:    
-                return image_list, {image_list[i]:Image.open(image_list[i]) for i in range(len(image_list))} 
+                return new_name_list, {new_name_list[i]:Image.open(image_list[i]) for i in range(len(image_list))} 
         
     # Handles the case where arguments were nd.arrays
     elif all(isinstance(image, np.ndarray) for image in image_list):

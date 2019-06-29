@@ -1,8 +1,8 @@
 import time
 import pprint
 from sys import exit as sysexit
-import numpy as np
 
+import numpy as np
 import ipywidgets as widgets
 from IPython.display import display, HTML, clear_output, Markdown
 
@@ -22,11 +22,11 @@ def main(image_list, image_name_list = [], crop_shape = 'Rectangle', continuous_
     image_list(list of str or nd.array objects) - A list of image filenames or a list of images as np.ndarray objects. 
 
     Optional Arguments:
-    continuous_update (default: True) - Bool to indicate whether the plot should dynamically re-render as the user drags the slider, or should wait til slider release to rerender
+    continuous_update (default: True) - Bool to indicate whether the plot should dynamically re-render as the user drags the slider, or should wait til slider release to rerender.
 
-    image_names_list(list, default: []) - The names of the images, to use when displaying the images and to pass to callback function. Must have same length as image_list. Recommended when providing nd.array objects in the image_list.
+    image_names_list(list, default: []) - The names of the images, to use when displaying the images and to pass to callback function. Must have same length as image_list. Recommended, especially when providing nd.array objects in the image_list.
 
-    shape (str, default: Rectangle) - The desired type of crop shape; Current options - Rectangle, Ellipse, Triangle
+    crop_shape (str, default: Rectangle) - The desired type of crop shape; Current options - Rectangle, Ellipse, Triangle
 
     optimize (bool, default: True) - Indicates whether the program can optimize for faster updating of crop boxes, including displaying grayscale images and reducing pixel quality of display
 
@@ -125,4 +125,4 @@ def main(image_list, image_name_list = [], crop_shape = 'Rectangle', continuous_
     return main_widget
 
 if __name__ == '__main__':
-    return main
+    print('Call main() function of this module with provided image arguments.')

@@ -4,7 +4,7 @@ This file contains various shapes used in cropping. Typically, each shape contai
 from PIL import Image, ImageDraw
 import numpy as np
 
-OPTIMIZE_THRESHOLD = 150000 # This (150kP or 0.15 MP) is the size above which we resize the image before displaying, if optimize
+OPTIMIZE_THRESHOLD = 200000 # This (200kP or 0.20 MP) is the size above which we resize the image before displaying, if optimize
 
 class Shape:
     """
