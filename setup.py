@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
      name='interactivecrop',  
-     version='0.0.4',
+     version='0.0.5',
      author="Sam Jett",
      author_email="samjett247@gmail.com",
      description="An interactive image cropping tool for Jupyter Notebooks in Python",
