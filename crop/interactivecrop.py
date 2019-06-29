@@ -1,12 +1,13 @@
+import time
+import pprint
+from sys import exit as sysexit
+import numpy as np
+
 import ipywidgets as widgets
 from IPython.display import display, HTML, clear_output, Markdown
-import time
-from PIL import Image, ImageDraw
-from sys import exit as sysexit
-from shapes import Rectangle, Ellipse, Triangle
-import numpy as np
-import widgets_helper
-import pprint
+
+from .shapes import Rectangle, Ellipse, Triangle
+from . import widgets_helper
 
 def default_callback(im_name, im_obj):
     print('{}: {}'.format(im_name,im_obj.get_size()))
@@ -124,4 +125,4 @@ def main(image_list, image_name_list = [], crop_shape = 'Rectangle', continuous_
     return main_widget
 
 if __name__ == '__main__':
-    print('Please call main() function and provide arguments.')
+    return main

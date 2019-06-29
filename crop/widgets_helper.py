@@ -1,6 +1,8 @@
+import numpy as np
+
 import ipywidgets as widgets
 from PIL import Image
-import numpy as np
+
 
 def create_image_name_LUT(image_list, image_name_list, optimize):
     """
