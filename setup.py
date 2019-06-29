@@ -4,18 +4,18 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
      name='interactivecrop',  
-     version='0.0.2',
+     version='0.0.4',
      author="Sam Jett",
      author_email="samjett247@gmail.com",
      description="An interactive image cropping tool for Jupyter Notebooks in Python",
      long_description=long_description,
    long_description_content_type="text/markdown",
-     url="https://github.com/samjett247/crop-interactive",
+     url="https://github.com/samjett247/interactive_crop",
      packages=setuptools.find_packages(),
      install_requires=[
         'pandas',
         'numpy',
-        'pillow'
+        'pillow',
         'ipywidgets',
         'ipython'],
      classifiers=[
