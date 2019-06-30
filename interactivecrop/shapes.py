@@ -73,7 +73,7 @@ class Rectangle(Shape):
         """
         Draws a rectangle on self.image based on self.size, only if the adjustment_count is sufficiently high, because the initialization involves some adjustments
         """
-        if self.adjustment_count >2:
+        if self.adjustment_count >3:
             draw = ImageDraw.Draw(self.image)
             line_width = int(np.min(self.image.size)/150)
             colstart, rowstart, width, height = self.size
@@ -101,7 +101,7 @@ class Ellipse(Shape):
         """
         Draws a rectangle on the self.image based on self.size, only if the adjustment_count is sufficiently high, because the initialization involves some adjustments
         """
-        if self.adjustment_count>2:
+        if self.adjustment_count>3:
             draw = ImageDraw.Draw(self.image)
             line_width = int(np.min(self.image.size)/150)
             x0,y0,x1,y1 = self.size
@@ -128,7 +128,7 @@ class Triangle(Shape):
         """
         Draws a triangle on the self.image based on self.size, only if the adjustment_count is sufficiently high, because the initialization involves some adjustments
         """
-        if self.adjustment_count>2:
+        if self.adjustment_count>3:
             draw = ImageDraw.Draw(self.image)
             line_width = int(np.min(self.image.size)/150)
             x0,y0,x1,y1 = self.size

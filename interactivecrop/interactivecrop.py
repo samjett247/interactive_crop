@@ -4,7 +4,7 @@ from sys import exit as sysexit
 
 import numpy as np
 import ipywidgets as widgets
-from IPython.display import display, HTML, clear_output, Markdown
+from IPython.display import display, HTML, Markdown
 
 from .shapes import Rectangle, Ellipse, Triangle
 from . import widgets_helper
@@ -44,14 +44,11 @@ def main(image_list, image_name_list = [], crop_shape = 'Rectangle', continuous_
         Shows the image at the desired size.
         image_name: name of the image
         """
-        # Clear output from prior image
-        clear_output()
-        
         # Get the image
         im = image_LUT[image_name]
             
         # Create copy of image to draw on
-        display(HTML('<h3 style="margin:5px;text-align:left">'+image_name+'</h3>'))
+        display(HTML('<h2 style="margin:5px;text-align:left">'+image_name+'</h2>'))
 
         # Instantiate shape object
         shape = SHAPE_DICT[crop_shape](x_mod.value, y_mod.value, im.copy(), crop_shape)
