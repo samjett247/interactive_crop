@@ -45,13 +45,13 @@ def main(image_list, image_name_list = [], crop_shape = 'Rectangle', continuous_
         image_name: name of the image
         """
         # Clear output from prior image
-        clear_output()
+        # clear_output()
         
         # Get the image
         im = image_LUT[image_name]
             
         # Create copy of image to draw on
-        display(HTML('<h3 style="margin:5px;text-align:left">'+image_name+'</h3>'))
+        display(HTML('<h2 style="margin:5px;text-align:left">'+image_name+'</h2>'))
 
         # Instantiate shape object
         shape = SHAPE_DICT[crop_shape](x_mod.value, y_mod.value, im.copy(), crop_shape)
