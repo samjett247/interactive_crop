@@ -44,9 +44,6 @@ def main(image_list, image_name_list = [], crop_shape = 'Rectangle', continuous_
         Shows the image at the desired size.
         image_name: name of the image
         """
-        # Clear output from prior image
-        # clear_output()
-        
         # Get the image
         im = image_LUT[image_name]
             
