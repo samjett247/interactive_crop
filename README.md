@@ -1,17 +1,9 @@
 # Jupyter Interactive Cropping Widget
 An interactive widget to rapidly crop images in Jupyter notebooks.
 
-<div width="100%">
-<video width="100%" height="auto" controls>
-  <source src="static/v3.webm" type="video/webm">
-  <source src="static/v3.mp4" type="video/mp4">
-  <p>Your browser does not support the embedded video. Please open in Chrome, Firefox, or Safari.</p>
-</video>
-</div>
+## [Widget Documentation, Examples, and Use](https://openbits.app/posts/python-interactive-cropping/).
 
-This widget can be found on the PyPI repository [here](https://pypi.org/project/interactivecrop/).
-
-**Further information about the utility and configuration can be found [here](https://openbits.app/posts/python-interactive-cropping/).**
+This widget can be found on the PyPI repository [here](https://pypi.org/project/interactivecrop/), and can be installed via `pip install interactivecrop`.
 
 ## Build Instructions
 ### Install Jupyter and enable ipywidgets
