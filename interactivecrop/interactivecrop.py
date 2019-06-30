@@ -4,7 +4,7 @@ from sys import exit as sysexit
 
 import numpy as np
 import ipywidgets as widgets
-from IPython.display import display, HTML, clear_output, Markdown
+from IPython.display import display, HTML, Markdown
 
 from .shapes import Rectangle, Ellipse, Triangle
 from . import widgets_helper
